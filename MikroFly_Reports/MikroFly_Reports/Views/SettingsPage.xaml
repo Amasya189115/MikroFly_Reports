@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MikroFly_Reports.Views.SettingsPage"
+             Title="Settings">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <StackLayout Padding="20,0,20,0" Spacing="10">
+
+                <Frame Padding="20,0,20,0" BorderColor="White" HasShadow="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="IP:" Grid.Column="0" VerticalOptions="Center"></Label>
+                        <Entry x:Name="EntryIP"  Grid.Column="1" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+                <Frame Padding="20,0,20,0" BorderColor="White" HasShadow="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Database:" Grid.Column="0" VerticalOptions="Center"></Label>
+                        <Entry x:Name="EntryDatabase" Grid.Column="1" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+                <Frame Padding="20,0,20,0" BorderColor="White" HasShadow="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="User:" Grid.Column="0" VerticalOptions="Center"></Label>
+                        <Entry x:Name="EntryUser" Grid.Column="1" VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+                <Frame Padding="20,0,20,0" BorderColor="White" HasShadow="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Password:" Grid.Column="0" VerticalOptions="Center"></Label>
+                        <Entry x:Name="EntryPassword" Grid.Column="1" VerticalOptions="Center" IsPassword="True"/>
+                    </Grid>
+                </Frame>
+
+                <Button x:Name="ButtonSave" Text="SUBMIT" WidthRequest="100" CornerRadius="20" Margin="0,40,0,0" Clicked="ButtonSave_Clicked"/>
+                <Button x:Name="ButtonCancel" Text="CANCEL" WidthRequest="100" CornerRadius="20" Margin="0,0,0,0" Clicked="ButtonCancel_Clicked" BackgroundColor="LightCoral"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

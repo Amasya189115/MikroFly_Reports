@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MikroFly_Reports.Views.DiaProdDetailsPage"
+             xmlns:dxg="http://schemas.devexpress.com/xamarin/2014/forms/datagrid"
+             Title="Work Center Stats">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolBarToExcel" Text="Excel" Clicked="ToolBarToExcel_Clicked"  IconImageSource="excel.png"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <StackLayout>
+                    <Grid HeightRequest="200">
+                        <Frame BorderColor="White" HasShadow="True">
+                                <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8*"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="LabelPieChartHeader" Text="Plan for This Year" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <microcharts:ChartView x:Name="ChartDiaAchievement" Grid.Row="1">
+                                    </microcharts:ChartView>
+                                    <Label x:Name="LabelObjective" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1"/>
+                                </Grid>
+                            </Frame>
+
+                        <Frame BorderColor="White" HasShadow="True" Grid.Column="1">
+                            <ScrollView>
+                                <Grid>
+                                    <Label Text="Instant Status" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Label x:Name="LabelProduct" Text=" - " Grid.Row="1"/>
+                                        <Label x:Name="LabelJobOrder" Text=" - " Grid.Row="2"/>
+                                        <Label x:Name="LabelStoppage" Text=" - " Grid.Row="3"/>
+                                        <Label x:Name="LabelOperator" Text=" - " Grid.Row="4"/>
+                                </Grid>
+                            </ScrollView>
+
+                        </Frame>
+                    </Grid>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <microcharts:ChartView HeightRequest="200" x:Name="ChartMonthlyProd">
+                        </microcharts:ChartView>
+                    </Frame>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <dxg:DataGridView  x:Name="GridMonthlyProductionWithProducts" CalculateCustomSummary="grid_CalculateCustomSummary"
+                                           GroupsInitiallyExpanded="False">
+                            <dxg:DataGridView.GroupSummaries>
+                                <dxg:GridColumnSummary FieldName="Value" Type="Sum"/>
+                            </dxg:DataGridView.GroupSummaries>
+
+                        </dxg:DataGridView>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

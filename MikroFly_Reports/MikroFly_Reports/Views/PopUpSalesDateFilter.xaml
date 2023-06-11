@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns:pages="http://rotorgames.com" 
+                  xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="MikroFly_Reports.Views.PopUpSalesDateFilter"
+                  xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center"
+                 BackgroundColor="Transparent"  WidthRequest="300" Padding="5,5,5,5">
+        <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="20">
+            <Label Text="Filter By" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="White"/>
+        </Frame>
+        <Frame CornerRadius="20" BackgroundColor="White">
+            <dxe:ComboBoxEdit x:Name="ComboBoxPeriod" HelpText="Report Period" TextHorizontalAlignment="Center" TextFontAttributes="Bold" 
+                          BorderColor="Firebrick" TextColor="Firebrick" SelectionChanged="ComboBoxPeriod_SelectionChanged"/>
+        </Frame>
+        <Grid>
+            <Button Text="FILTER" x:Name="ButtonPopUpFilter" Clicked="ButtonPopUpFilter_Clicked" CornerRadius="20"/>
+            <Button Text="EXIT" x:Name="ButtonPopUpExit" CornerRadius="20" BackgroundColor="Firebrick" Grid.Column="1" Clicked="ButtonPopUpExit_Clicked"/>
+        </Grid>
+    </StackLayout>
+</pages:PopupPage>

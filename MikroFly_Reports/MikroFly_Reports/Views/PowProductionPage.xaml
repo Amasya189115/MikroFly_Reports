@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MikroFly_Reports.Views.PowProductionPage"
+             Title="Production of The Day">
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <Grid x:Name="GridAll">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="FrameForming" HasShadow="True" ClassId="M1">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap"  NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Forming" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelForming" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameFilling" HasShadow="True" Grid.Column="1" ClassId="M2">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Filling" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelFilling" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameSealing" HasShadow="True" Grid.Row="1" ClassId="M3">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Sealing" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelSealing" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameTesting" HasShadow="True" Grid.Row="1" Grid.Column="1" ClassId="M4">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Testing" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelTesting" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameCartLine" HasShadow="True" Grid.Row="2" ClassId="CART">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="NephroCart Line" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelCartLine" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50"  Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FramePacking" HasShadow="True" Grid.Row="2" Grid.Column="1" ClassId="PACK">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Packing" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelPacking" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

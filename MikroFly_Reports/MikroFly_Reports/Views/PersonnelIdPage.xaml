@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MikroFly_Reports.Views.PersonnelIdPage"
+             Title="Personnel Id Page">
+    <ContentPage.Content>
+        <Grid>
+            <Frame BorderColor="White" HasShadow="True">
+                <Image x:Name="ImagePerson"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            </Frame>
+            <Frame Grid.Row="1">
+                <StackLayout HorizontalOptions="Center">
+                    <Label x:Name="LabelName" Text="Name:" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" Padding="0,20,0,0"/>
+                    <Label x:Name="LabelTitle" Text="Title:" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="LabelDepartment" Text="Departman:" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="LabelEntryDate" Text="Entry Date:" HorizontalTextAlignment="Center" Padding="0,80,0,0"/>
+                    <Label x:Name="LabelAnnualLeave" Text="Remained Annual Leave:" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

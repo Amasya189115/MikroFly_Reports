@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MikroFly_Reports.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutItemIsVisible="False">
+    <ContentPage.Content>
+        <StackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <StackLayout>
+                <Image Source="nephrocan"></Image>
+                <StackLayout Padding="0,20,0,50">
+                    <Label Text="WELCOME!" FontSize="Title" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="Login to you account" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Frame HasShadow="True" CornerRadius="28">
+                        <Image Source="user.png" HeightRequest="20" WidthRequest="20"
+                            />
+                    </Frame>
+
+                    <Frame Margin="-20,0,0,0" Padding="0" HasShadow="True" HorizontalOptions="FillAndExpand" CornerRadius="28">
+                        <Picker x:Name="PickerUsers" Margin="20,0,0,0" VerticalOptions="Center" Title=" Kullanıcı Adı" ItemDisplayBinding="{Binding user_name}"
+                                 SelectedIndexChanged="PickerUsers_SelectedIndexChanged"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Margin="0,5,0,0">
+                    <Frame HasShadow="True"  CornerRadius="28">
+                        <Image Source="lock.png" HeightRequest="20" WidthRequest="20"
+                            />
+                    </Frame>
+                    <Frame Margin="-20,0,0,0" Padding="0" HasShadow="True" HorizontalOptions="FillAndExpand" CornerRadius="28">
+                        <Entry x:Name="EntryPassword" Margin="20,0,0,0" VerticalOptions="Center" Placeholder=" Şifre" IsPassword="True"/>
+                    </Frame>
+                </StackLayout>
+
+                <Button x:Name="BtnLogin" Text="LOGIN" WidthRequest="100" CornerRadius="20" Margin="0,20,0,0" Clicked="BtnLogin_Clicked"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,20,0,0">
+                    <Label Text="Don't have an account?" TextColor="Gray" VerticalTextAlignment="Center"/>
+                    <Button x:Name="ButtonRegister" BackgroundColor="Transparent" Text="SIGN Up Here" TextColor="DeepSkyBlue" Clicked="ButtonRegister_Clicked"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,-20,0,0">
+                    <Label Text="For start up settings?" TextColor="Gray" VerticalTextAlignment="Center"/>
+                    <Button x:Name="ButtonSettings" BackgroundColor="Transparent" Text="CLICK Here" TextColor="DeepSkyBlue" Clicked="ButtonSettings_Clicked"/>
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

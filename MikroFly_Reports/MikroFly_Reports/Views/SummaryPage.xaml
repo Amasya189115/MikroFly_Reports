@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:dxc="http://schemas.devexpress.com/xamarin/2014/forms/charts" 
+             xmlns:local="clr-namespace:MikroFly_Reports" 
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MikroFly_Reports.Views.SummaryPage"
+             x:Name="PageSummery"
+             Title="Salable Inventory"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolBarItemFilter" Text="Excel" Clicked="ToolBarItemFilter_Clicked"  IconImageSource="filter.png"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <StackLayout>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="LabelDia" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <microcharts:ChartView x:Name="chartViewDia" HeightRequest="200" Grid.Row="1">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerDia" NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                        </Grid>
+                    </Frame>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="LabelBlo" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <microcharts:ChartView x:Name="chartViewLine" HeightRequest="200" Grid.Row="1">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerBlo" NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                        </Grid>
+                    </Frame>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="LabelNeedle" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <microcharts:ChartView x:Name="chartViewNeedle" HeightRequest="200" Grid.Row="1">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerNeedle" NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                        </Grid>
+
+                    </Frame>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="LabelPow" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <microcharts:ChartView x:Name="chartViewPowder" HeightRequest="200" Grid.Row="1">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerPow" NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+
+ 
+
+
+
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+
+</ContentPage>

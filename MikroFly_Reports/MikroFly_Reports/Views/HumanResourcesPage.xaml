@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MikroFly_Reports.Views.HumanResourcesPage"
+             Title="Summary">
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Frame BorderColor="White" HasShadow="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8*"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="LabelPieChartHeader" Text="Absentee Ratio" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <microcharts:ChartView Grid.Row="1" x:Name="ChartAbsenteeRate">
+                                    <microcharts:ChartView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ChartAbsenteeRate_Tapped"  NumberOfTapsRequired="2"/>
+                                    </microcharts:ChartView.GestureRecognizers>
+                                </microcharts:ChartView>
+                                <Label x:Name="LabelAbsenteePercentage" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame BorderColor="White" HasShadow="True" Grid.Column="1">
+                            <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="8*"/>
+                                        <RowDefinition Height="*"/>
+                                     </Grid.RowDefinitions>
+                                    <Label Text="Gender Ratio" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                    <microcharts:ChartView Grid.Row="1" x:Name="ChartGenderRatio">
+                                    <microcharts:ChartView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ChartGenderRatio_Tapped"  NumberOfTapsRequired="2"/>
+                                    </microcharts:ChartView.GestureRecognizers>
+                                </microcharts:ChartView>
+                                    <Label x:Name="LabelTotalEmployee" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1"/>
+                                <Grid Grid.Row="2">
+                                    <Label x:Name="LabelMale" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" TextColor="#C7163C"/>
+                                    <Label x:Name="LabelFemale" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Frame BorderColor="White" HasShadow="True" Grid.Row="1">
+                        <microcharts:ChartView x:Name="ChartEducation">
+                            <microcharts:ChartView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ChartEducation_Tapped"  NumberOfTapsRequired="2"/>
+                            </microcharts:ChartView.GestureRecognizers>
+                        </microcharts:ChartView>
+                    </Frame>
+                    <Frame BorderColor="White" HasShadow="True" Grid.Row="2">
+                        <microcharts:ChartView x:Name="ChartAge">
+                            <microcharts:ChartView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ChartAge_Tapped"  NumberOfTapsRequired="2"/>
+                            </microcharts:ChartView.GestureRecognizers>
+                        </microcharts:ChartView>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

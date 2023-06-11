@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors" 
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MikroFly_Reports.Views.SalesRevenuePage"
+             Title="Sales Revenue of All Time"
+             x:Name="SalesRevenueValuePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolBartoDateFilter" Clicked="ToolBartoDateFilter_Clicked" IconImageSource="filter.png"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <Grid Padding="3,0,3,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Frame Padding="0,0,0,0">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="3*"/>
+                            </Grid.RowDefinitions>
+                            <Frame Padding="0" BackgroundColor="Firebrick"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="LabelTotalRevenue" Text="€ XXX,XX" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold" TextColor="White"/>
+                                <Switch x:Name="SwitchQtytoRevenue" Grid.Column="1" Toggled="SwitchQtytoRevenue_Toggled"/>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <microcharts:ChartView x:Name="PieChartViewProductTypes">
+                                    <microcharts:ChartView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Pie"  NumberOfTapsRequired="2"/>
+                                    </microcharts:ChartView.GestureRecognizers>
+                                </microcharts:ChartView>
+                                <StackLayout VerticalOptions="Center" Grid.Column="1">
+                                    <Label x:Name="Label1" Text="DIA: %40" FontAttributes="Bold" TextColor="#fd7f6f" VerticalOptions="Start"/>
+                                    <Label x:Name="Label2" Text="BLO: %40" FontAttributes="Bold" TextColor="#7eb0d5" VerticalOptions="Start"/>
+                                    <Label x:Name="Label3" FontAttributes="Bold" TextColor="#b2e061" VerticalOptions="Start"/>
+                                    <Label x:Name="Label4" FontAttributes="Bold" TextColor="#bd7ebe" VerticalOptions="Start"/>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                    <Frame Padding="0,0,0,0" Grid.Row="1">
+      
+                            <microcharts:ChartView x:Name="PointChartViewTime">
+                            <microcharts:ChartView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_PointChartViewTime"  NumberOfTapsRequired="2"/>
+                            </microcharts:ChartView.GestureRecognizers>
+                        </microcharts:ChartView>
+
+                    </Frame>
+                    <Frame Padding="0,0,0,0" Grid.Row="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <microcharts:ChartView x:Name="PointChartViewTopic">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_PointChartViewTopic"  NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                            <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                                <Label Text="Top 10" HorizontalOptions="Center" TextColor="#e60049" FontAttributes="Bold"/>
+                                <Label x:Name="LabelSelected" HorizontalOptions="Center" TextColor="#e60049" FontAttributes="Bold"/>
+                                <dxe:ChoiceChipGroup x:Name="choiceChipGroup"
+                                    IsMultiline="True"
+                                    ChipTextColor="#F8F2EA">
+                                    <dxe:Chip x:Name="ChipCountry" Text="Country" Icon="country.png" IsIconVisible="True"
+                                    BackgroundColor="#fedcda" Tap="Chip_Tap" IsSelected="True"
+                                    TextColor="#A7A195"/>
+                                    <dxe:Chip x:Name="ChipCustomer" Text="Customer" Tap="Chip_Tap"
+                                    BackgroundColor="#fedcda" Icon="people.png" IsIconVisible="True"
+                                    TextColor="#A7A195"/>
+                                    <dxe:Chip x:Name="ChipType" Text="Type" Tap="Chip_Tap"
+                                    BackgroundColor="#fedcda" Icon="shapes.png" IsIconVisible="True"
+                                    TextColor="#A7A195"/>
+                                </dxe:ChoiceChipGroup>
+                            </StackLayout>
+
+                        </Grid>
+
+
+                    </Frame>
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

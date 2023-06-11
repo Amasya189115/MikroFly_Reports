@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MikroFly_Reports.Views.BloProductionPage"
+             Title="Production of The Day">
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <Grid x:Name="GridAll">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Frame x:Name="FrameExtruder" HasShadow="True" ClassId="NEPHROCAN-Ext">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Extruder" HorizontalOptions="CenterAndExpand" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelExtruder" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameAssembly" HasShadow="True" Grid.Column="1" ClassId="NEPHROCAN-Assembly">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap" NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Assembly" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelAssembly" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50" Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="FramePacking" HasShadow="True" Grid.Row="1" ClassId="NEPHROCAN-Packing">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="FrameTap"  NumberOfTapsRequired="2"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="Packing" HorizontalOptions="Center" FontSize="Body" FontAttributes="Bold"/>
+                            <Label x:Name="LabelPacking" Text="0" VerticalOptions="Center" HorizontalOptions="Center" FontSize="50"  Padding="0,50,0,0" FontAttributes="Bold"/>
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

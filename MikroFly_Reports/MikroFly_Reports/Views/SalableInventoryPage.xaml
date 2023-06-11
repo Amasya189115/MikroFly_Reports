@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MikroFly_Reports.Views.SalableInventoryPage"
+             xmlns:dxg="http://schemas.devexpress.com/xamarin/2014/forms/datagrid"
+             Title="Salable Inventory">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolBarToExcel" Text="Excel" Clicked="ToolBarToExcel_Clicked" IconImageSource="excel.png"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <dxg:DataGridView x:Name="DataGridViewAll" SortMode="Multiple" ShowAutoFilterRow="True" DoubleTap="DataGridViewAll_DoubleTap"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

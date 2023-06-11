@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns:pages="http://rotorgames.com" 
+                  xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="MikroFly_Reports.Views.PopUpGroupByColumns"
+                  xmlns:dxe="http://schemas.devexpress.com/xamarin/2014/forms/editors">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center"
+                 BackgroundColor="Transparent"  WidthRequest="300" Padding="5,5,5,5">
+        <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="20">
+            <Label Text="Group By" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="White"/>
+        </Frame>
+        <Frame CornerRadius="20" BackgroundColor="White">
+            <dxe:ComboBoxEdit x:Name="ComboBoxGroups" HelpText="Column" TextHorizontalAlignment="Center" TextFontAttributes="Bold" 
+                          BorderColor="Firebrick" TextColor="Firebrick" SelectionChanged="ComboBoxGroups_SelectionChanged"/>
+        </Frame>
+        <Frame CornerRadius="20" BackgroundColor="White">
+            <Grid>
+                <Button Text="GROUP" x:Name="ButtonPopUpFilter" CornerRadius="20" IsEnabled="False" Clicked="ButtonPopUpFilter_Clicked"/>
+                <Button Text="CLOSE" x:Name="ButtonPopUpCLose" CornerRadius="20" Grid.Column="1" BackgroundColor="Firebrick" Clicked="ButtonPopUpCLose_Clicked"/>
+            </Grid>
+        </Frame>
+    </StackLayout>
+</pages:PopupPage>
