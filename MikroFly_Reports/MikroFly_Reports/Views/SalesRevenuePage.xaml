@@ -30,11 +30,11 @@
                             <Frame Padding="0" BackgroundColor="Firebrick"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10*"/>
+                                    <ColumnDefinition Width="8*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label x:Name="LabelTotalRevenue" Text="€ XXX,XX" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Bold" TextColor="White"/>
-                                <Switch x:Name="SwitchQtytoRevenue" Grid.Column="1" Toggled="SwitchQtytoRevenue_Toggled"/>
+                                <Switch x:Name="SwitchQtytoRevenue" Grid.Column="1" Toggled="SwitchQtytoRevenue_Toggled" ThumbColor="White"/>
                             </Grid>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>

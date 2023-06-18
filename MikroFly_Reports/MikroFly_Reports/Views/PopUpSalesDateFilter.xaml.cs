@@ -23,12 +23,12 @@ namespace MikroFly_Reports.Views
         {
             List<string> itemlist = new List<string>();
             int loop = 0;
-            int year = 2021;
-            loop = DateTime.Now.Year - 2021;
+            int sene = 2020;
+            loop = DateTime.Now.Year - 2020;
             for (int i = 0; i <= loop; i++)
             {
-                itemlist.Add(year.ToString());
-                year++;
+                itemlist.Add(sene.ToString());
+                sene++;
             }
             itemlist.Add("All Years");
             ComboBoxPeriod.ItemsSource = itemlist;

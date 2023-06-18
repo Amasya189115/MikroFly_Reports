@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
+﻿using DevExpress.XamarinForms.DataGrid;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using MikroFly_Reports.Models;
 using Rg.Plugins.Popup.Services;
@@ -155,17 +156,13 @@ namespace MikroFly_Reports.Views
                     column.Width = 100;
                     column.AutoFilterCondition = DevExpress.Data.AutoFilterCondition.Contains;
 
-
-
                     if (column.FieldName == "Product")
                     { column.FixedStyle = DevExpress.XamarinForms.DataGrid.FixedStyle.Start; }
                     if (column.FieldName == GroupBy)
                     { column.IsGrouped = true; 
                     }
-                    if (SalesRevenuePage.CurrencyOrPcs == string.Empty)
-                    { DataGridSalesList. = "Qty"; }
+                    
                 }
-                
                 sdr.Close();
                 sqlcon.Close();
             }

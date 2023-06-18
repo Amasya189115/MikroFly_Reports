@@ -108,7 +108,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("SELECT * from FX_MOBILAPP_SALES_REVENUE("+ IlkTarih+ ","+SonTarih+")", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("SELECT * from FX_MOBILAPP_SALES_REVENUE("+ IlkTarih+ ","+SonTarih+","+RevenueOrQty+")", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -322,17 +322,17 @@ namespace MikroFly_Reports.Views
             string sqlcom = string.Empty;
             if(LabelSelected.Text=="Country")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10COUNTRY] ( "+IlkTarih+"  ,"+SonTarih+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10COUNTRY] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
             }
 
             if(LabelSelected.Text == "Customer")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10CUSTOMER] ( "+IlkTarih+"  ,"+SonTarih+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10CUSTOMER] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
             }
 
             if(LabelSelected.Text == "Type")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10PRODUCT] ( "+IlkTarih+"  ,"+SonTarih+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10PRODUCT] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
             }
 
             try

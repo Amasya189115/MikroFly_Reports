@@ -12,6 +12,7 @@ namespace MikroFly_Reports.Models
         public string SterNu { get; set; }
         public string Product { get; set; }
         public float Quantity { get; set; }
+        public float EuroValue { get; set; }
         public DateTime Date { get; set; }
         public string Group { get; set; }
     }

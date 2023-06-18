@@ -1,4 +1,5 @@
-﻿using Rg.Plugins.Popup.Extensions;
+﻿using DocumentFormat.OpenXml;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace MikroFly_Reports.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PopUpSalesFilters : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public List<string> Market;
         public List<string> Country;
         public List<string> Customer;
         public List<string> ProductType;
@@ -28,7 +28,6 @@ namespace MikroFly_Reports.Views
         public PopUpSalesFilters(List<string> CustomerFilter, List<string> CountryFilter, List<string> ProductTypeFilter, List<string> ColumnGroupList)
         {
             InitializeComponent();
-            Market = new List<string>();
             ColumnList = new List<string>();
             Country = new List<string>();
             Customer = new List<string>();
@@ -53,8 +52,6 @@ namespace MikroFly_Reports.Views
 
         private async void ButtonPopUpFilter_Clicked(object sender, EventArgs e)
         {
-            if(ComboBoxMarket.SelectedValue is null)
-            { } else { MarketEventHandler?.Invoke(this, ComboBoxMarket.SelectedValue.ToString()); }
 
             if (ComboBoxCountry.SelectedValue is null)
             { }

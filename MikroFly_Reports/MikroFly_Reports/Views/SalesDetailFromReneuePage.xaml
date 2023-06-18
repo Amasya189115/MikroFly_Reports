@@ -15,6 +15,7 @@
                                   GroupsInitiallyExpanded="False">
                 <dxg:DataGridView.GroupSummaries>
                     <dxg:GridColumnSummary FieldName="EuroValue" Type="Sum"/>
+                    <dxg:GridColumnSummary FieldName="Amount" Type="Sum"/>
                 </dxg:DataGridView.GroupSummaries>
             </dxg:DataGridView>
         </StackLayout>

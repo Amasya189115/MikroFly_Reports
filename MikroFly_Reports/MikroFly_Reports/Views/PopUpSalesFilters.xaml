@@ -13,7 +13,6 @@
             </Frame>
             <Frame CornerRadius="20">
                 <StackLayout>
-                    <dxe:ComboBoxEdit HelpText="Market" x:Name="ComboBoxMarket"/>
                     <dxe:ComboBoxEdit HelpText="Country" x:Name="ComboBoxCountry"/>
                     <dxe:ComboBoxEdit HelpText="Customer" x:Name="ComboBoxCustomer"/>
                     <dxe:ComboBoxEdit HelpText="Product" x:Name="ComboBoxProduct"/>
@@ -31,7 +30,7 @@
                 <Grid>
                     <Label Text="From:" FontAttributes="Bold" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                     <Label Text="To:" Grid.Row="1" FontAttributes="Bold" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                    <DatePicker Grid.Column="1" x:Name="DateTimePickerStartDate"></DatePicker>
+                    <DatePicker Grid.Column="1" x:Name="DateTimePickerStartDate" Date="01/01/2020"></DatePicker>
                     <DatePicker Grid.Column="1" Grid.Row="1" x:Name="DateTimePickerEndDate"></DatePicker>
                 </Grid>
             </Frame>

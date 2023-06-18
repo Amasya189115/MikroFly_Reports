@@ -32,8 +32,8 @@ namespace MikroFly_Reports.Views
         public string FilterByProductType = string.Empty;
         public string FilterByGroupBy = string.Empty;
         public string FilterByStockName = string.Empty;
-        public DateTime FilterByStartDate = new DateTime(2015, 12, 31);
-        public DateTime FilterByEndDate = new DateTime(2015, 12, 31);
+        public string FilterByStartDate = string.Empty;
+        public string FilterByEndDate = string.Empty;
         public List<SalesRecords> SalesRecord { get; set; }
         public List<SalesRecords> FilteredSalesRecord { get; set; }
         public SalesDetailPage()
@@ -46,7 +46,7 @@ namespace MikroFly_Reports.Views
             Country = new List<string>();
             Customer = new List<string>();  
             ProductType = new List<string>();
-            Group = "Group";
+            Group = "Customer";
             FillDataGrid();
             GroupSaleColumns();
         }
@@ -55,18 +55,13 @@ namespace MikroFly_Reports.Views
         {
                 try
                 {
-                       Group = "Group";
-                       FilterByMarket = string.Empty;
+                       Group = "Customer";
                        FilterByCountry = string.Empty;
                        FilterByCustomer = string.Empty;
                        FilterByProductType = string.Empty;
                        FilterByGroupBy = string.Empty;
                        FilterByStockName = string.Empty;
                 var pageInfo = new PopUpSalesFilters(Customer, Country, ProductType, ColumnList);
-                pageInfo.MarketEventHandler += async (popupsender, userdata) =>
-                {
-                    FilterByMarket = userdata;
-                };
                 pageInfo.CountryEventHandler += async (popupsender, userdata) =>
                 {
                     FilterByCountry = userdata;
@@ -77,30 +72,7 @@ namespace MikroFly_Reports.Views
                 };
                 pageInfo.ProductTypeEventHandler += async (popupsender, userdata) =>
                 {
-                    if (userdata == "Dialyzer")
-                    {
-                        FilterByProductType = "PR1";
-                    }
-                    else
-                    {
-                        if (userdata == "Bloodline")
-                        {
-                            FilterByProductType = "PR2";
-                            FilterByStockName = "Line";
-                        }
-                        else
-                        {
-                            if (userdata == "Needle")
-                            {
-                                FilterByProductType = "PR2";
-                                FilterByStockName = "Need";
-                            }
-                            else
-                            {
-                                FilterByProductType = "PR3";
-                            }
-                        }
-                    }
+                    FilterByStockName= userdata;
                 };
                 pageInfo.GroupByEventHandler += async (popupsender, userdata) =>
                 {
@@ -108,11 +80,23 @@ namespace MikroFly_Reports.Views
                 };
                 pageInfo.StartDateEventHandler += async (popupsender, userdata) =>
                 {
-                    FilterByStartDate = userdata;
+                    string ay = string.Empty;
+                    if (userdata.Month < 10)
+                        ay = "0";
+                    string gun = string.Empty;
+                    if (userdata.Month < 10)
+                        gun = "0";
+                    FilterByStartDate = "'"+userdata.Year.ToString() + ay + userdata.Month.ToString() + gun + userdata.Day.ToString()+"'";
                 };
                 pageInfo.EndDateEventHandler += async (popupsender, userdata) =>
                 {
-                    FilterByEndDate = userdata;
+                    string ay=string.Empty;
+                    if (userdata.Month < 10)
+                        ay = "0";
+                    string gun = string.Empty;
+                    if (userdata.Day < 10)
+                        gun = "0";
+                    FilterByEndDate = "'"+userdata.Year.ToString()+ ay+userdata.Month.ToString()+ gun+userdata.Day.ToString()+"'";
                     FillDataGridFiltered();
                 };
 
@@ -147,7 +131,7 @@ namespace MikroFly_Reports.Views
                 }
                 var groupByProductType =
                 from student in SalesRecord
-                group student by student.Group into groupedCustomer
+                group student by student.Product into groupedCustomer
                 select groupedCustomer.Key;
                 foreach (var item in groupByProductType)
                 {
@@ -169,7 +153,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Select Left(adr_ulke,13) 'Country',Left(cari_unvan1,13) 'Customer',sth_parti_kodu 'LotNu',sth_lot_no 'SterNu',sto_isim 'Product',\r\nsum(sth_miktar) 'Quantity',sth_tarih 'Date', \r\ncase when sto_anagrup_kod ='PR1' then 'Dialyzer'\r\nwhen sto_anagrup_kod='PR2' and sto_isim like '%Need%' then 'Needle'\r\nwhen sto_anagrup_kod='PR2' and sto_isim not like '%Need%' then 'Bloodline'\r\nwhen sto_anagrup_kod='PR3' then 'Powder'\r\nelse '' end as 'Group'\r\nfrom CARI_HESAP_HAREKETLERI \r\ninner join STOK_HAREKETLERI on sth_fat_uid=cha_Guid\r\ninner join CARI_HESAPLAR on cha_kod=cari_kod\r\ninner join STOKLAR on sth_stok_kod=sto_kod\r\nleft outer join CARI_HESAP_ADRESLERI on adr_cari_kod=cari_kod and adr_adres_no=1\r\nwhere cha_evrak_tip=63 and sto_anagrup_kod in ('PR1','PR2','PR3') and \r\ncari_unvan1 not in ('MEDICALPARK EOOD','ERDEMLER GERİ DÖNÜŞÜM METAL SANAYİ VE TİCARET LİMİTED ŞİRKETİ','TURKA GROUP MEDİKAL TİCARET ANONİM ŞİRKETİ','TURKAGROUP MEDİKAL TİCARET LTD.ŞTİ.')\r\ngroup by adr_ulke,cari_unvan1,sth_stok_kod,sto_isim,sth_parti_kodu,sth_lot_no,sto_anagrup_kod,sth_tarih\r\n", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("Select * from [dbo].[FX_MOBILAPP_SALES_SALESDETAILS_WITHLOTNUMBERS] ( '20200101'  , Getdate(), '%%', '', '%%', '%%', '%%', '%%' )", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -177,12 +161,13 @@ namespace MikroFly_Reports.Views
                     {
                         Country = sdr[0].ToString(),
                         Customer = sdr[1].ToString(),
-                        LotNu = sdr[2].ToString(),
-                        SterNu = sdr[3].ToString(),
-                        Product = sdr[4].ToString(),
-                        Quantity = float.Parse(sdr[5].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                        Group = sdr[2].ToString(),
+                        Product = sdr[3].ToString(),
+                        LotNu = sdr[4].ToString(),
+                        SterNu = sdr[5].ToString(),
                         Date = Convert.ToDateTime(sdr[6]),
-                        Group = sdr[7].ToString(),
+                        Quantity = float.Parse(sdr[7].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                        EuroValue = float.Parse(sdr[8].ToString(), CultureInfo.InvariantCulture.NumberFormat),                      
                     });
                 }
                 DataGridSalesList.ItemsSource = null;
@@ -220,8 +205,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Select Left(adr_ulke,13) 'Country',Left(cari_unvan1,13) 'Customer',sth_parti_kodu 'LotNu',sth_lot_no 'SterNu',sto_isim 'Product',\r\nsum(sth_miktar) 'Quantity',sth_tarih 'Date', \r\ncase when sto_anagrup_kod ='PR1' then 'Dialyzer'\r\nwhen sto_anagrup_kod='PR2' and sto_isim like '%Need%' then 'Needle'\r\nwhen sto_anagrup_kod='PR2' and sto_isim not like '%Need%' then 'Bloodline'\r\nwhen sto_anagrup_kod='PR3' then 'Powder'\r\nelse '' end as 'Group'\r\nfrom CARI_HESAP_HAREKETLERI \r\ninner join STOK_HAREKETLERI on sth_fat_uid=cha_Guid\r\ninner join CARI_HESAPLAR on cha_kod=cari_kod\r\ninner join STOKLAR on sth_stok_kod=sto_kod\r\nleft outer join CARI_HESAP_ADRESLERI on adr_cari_kod=cari_kod and adr_adres_no=1\r\nwhere"+
-                    " Left(adr_ulke,13) Like '%"+FilterByCountry+ "%' and  Left(cari_unvan1,13) Like '%" + FilterByCustomer+ "%' and  sto_anagrup_kod Like '%" + FilterByProductType+ "%' and  sto_isim Like '%" + FilterByStockName+"%' and cha_evrak_tip=63 and sto_anagrup_kod in ('PR1','PR2','PR3') and \r\ncari_unvan1 not in ('MEDICALPARK EOOD','ERDEMLER GERİ DÖNÜŞÜM METAL SANAYİ VE TİCARET LİMİTED ŞİRKETİ','TURKA GROUP MEDİKAL TİCARET ANONİM ŞİRKETİ','TURKAGROUP MEDİKAL TİCARET LTD.ŞTİ.')\r\ngroup by adr_ulke,cari_unvan1,sth_stok_kod,sto_isim,sth_parti_kodu,sth_lot_no,sto_anagrup_kod,sth_tarih\r\n", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("Select * from [dbo].[FX_MOBILAPP_SALES_SALESDETAILS_WITHLOTNUMBERS] ( "+FilterByStartDate+"  , "+FilterByEndDate+", '%%', '', '%%', '%"+FilterByCountry+"%', '%"+FilterByCustomer+"%', '%"+FilterByStockName+"%' )", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -229,12 +213,13 @@ namespace MikroFly_Reports.Views
                     {
                         Country = sdr[0].ToString(),
                         Customer = sdr[1].ToString(),
-                        LotNu = sdr[2].ToString(),
-                        SterNu = sdr[3].ToString(),
-                        Product = sdr[4].ToString(),
-                        Quantity = float.Parse(sdr[5].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                        Group = sdr[2].ToString(),
+                        Product = sdr[3].ToString(),
+                        LotNu = sdr[4].ToString(),
+                        SterNu = sdr[5].ToString(),
                         Date = Convert.ToDateTime(sdr[6]),
-                        Group = sdr[7].ToString(),
+                        Quantity = float.Parse(sdr[7].ToString(), CultureInfo.InvariantCulture.NumberFormat),
+                        EuroValue = float.Parse(sdr[8].ToString(), CultureInfo.InvariantCulture.NumberFormat),
                     });
                 }
                 DataGridSalesList.ItemsSource=null;
@@ -267,7 +252,7 @@ namespace MikroFly_Reports.Views
         }
         private async void DataGridSalesList_PullToRefresh(object sender, EventArgs e)
         {
-            FillDataGrid();
+            FillDataGridFiltered();
             await Task.Delay(2000);
             DataGridSalesList.IsRefreshing = false;
         }
