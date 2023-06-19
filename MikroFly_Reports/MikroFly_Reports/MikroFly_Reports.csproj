@@ -81,7 +81,7 @@
     <EmbeddedResource Update="Views\SalesDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SalesMainPage.xaml">
+    <EmbeddedResource Update="Views\SalesDialyzerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SalesRevenueDetailPage.xaml">

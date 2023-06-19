@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MikroFly_Reports.Views.SalesDialyzerPage">
+    <ContentPage.Content>
+        <RefreshView x:Name="RefreshView">
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="9*"/>
+                    </Grid.RowDefinitions>
+                    <Frame BorderColor="White" HasShadow="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="8*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="LabelDia" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
+                            <microcharts:ChartView x:Name="chartViewDia" Grid.Row="1">
+                                <microcharts:ChartView.GestureRecognizers>
+                                    <TapGestureRecognizer  NumberOfTapsRequired="2"/>
+                                </microcharts:ChartView.GestureRecognizers>
+                            </microcharts:ChartView>
+                        </Grid>
+                    </Frame>
+                    <Grid Grid.Row="1">
+                        <Frame BorderColor="White" HasShadow="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="8*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <microcharts:ChartView x:Name="ChartFluxRatio">
+                                    <microcharts:ChartView.GestureRecognizers>
+                                        <TapGestureRecognizer  NumberOfTapsRequired="2"/>
+                                    </microcharts:ChartView.GestureRecognizers>
+                                </microcharts:ChartView>
+                                <Grid Grid.Row="1">
+                                    <Label x:Name="LabelHF" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" TextColor="#C7163C"/>
+                                    <Label x:Name="LabelLF" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+
+                        <Frame BorderColor="White" HasShadow="True" Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="8*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <microcharts:ChartView x:Name="ChartTypeRatio">
+                                    <microcharts:ChartView.GestureRecognizers>
+                                        <TapGestureRecognizer  NumberOfTapsRequired="2"/>
+                                    </microcharts:ChartView.GestureRecognizers>
+                                </microcharts:ChartView>
+                                <Grid Grid.Row="1">
+                                    <Label x:Name="LabelPS" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" Grid.Column="1" TextColor="#C7163C"/>
+                                    <Label x:Name="LabelPES" Text="Objective" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Gray"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <Frame BorderColor="White" HasShadow="True" Grid.Row="2">
+                        <microcharts:ChartView x:Name="ChartSize">
+                            <microcharts:ChartView.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="2"/>
+                            </microcharts:ChartView.GestureRecognizers>
+                        </microcharts:ChartView>
+                    </Frame>
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>

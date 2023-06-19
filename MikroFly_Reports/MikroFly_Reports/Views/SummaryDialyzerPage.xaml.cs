@@ -178,11 +178,12 @@ namespace MikroFly_Reports.Views
             {
                 if (item.Title.Substring(item.Title.IndexOf("S")).Remove(item.Title.Substring(item.Title.IndexOf("S")).Length-1).Length == 3)
                 {
-                    CountHF = CountHF + item.QTY;
+                    CountLF = CountLF + item.QTY;
                 }
                 else
                 {
-                    CountLF=CountLF+item.QTY;
+                    
+                    CountHF = CountHF + item.QTY;
                 }                                       
             }
             var entries = new List<ChartEntry>();

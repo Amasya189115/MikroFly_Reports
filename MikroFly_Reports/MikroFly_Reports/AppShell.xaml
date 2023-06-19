@@ -113,7 +113,7 @@
     </FlyoutItem>
     <FlyoutItem Title="Sales Page" Icon="sales.png">
         <ShellContent Route="SalesRevenuePage" ContentTemplate="{DataTemplate local:SalesRevenuePage}" Title="$ Summary" Icon="icon_feed.png"/>
-        <ShellContent Route="SalesMainPage" ContentTemplate="{DataTemplate local:SalesMainPage}" Title="QTY Summary" Icon="icon_feed.png"/>
+        <ShellContent Route="SalesDialyzerPage" ContentTemplate="{DataTemplate local:SalesDialyzerPage}" Title="Dialyzers" Icon="icon_feed.png"/>
         <ShellContent Route="SalesDetailPage" ContentTemplate="{DataTemplate local:SalesDetailPage}" Title="Detail" Icon="icon_feed.png"/>
 
     </FlyoutItem>
