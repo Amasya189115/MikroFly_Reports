@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="MikroFly_Reports.Views.SalesDialyzerPage">
+             x:Class="MikroFly_Reports.Views.SalesDialyzerPage"
+             Title="Dialyzer Sales of All Times"
+             x:Name="SalesDialyzerAnalysisPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="ToolBartoDateFilter" Clicked="ToolBartoDateFilter_Clicked" IconImageSource="filter.png"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <RefreshView x:Name="RefreshView">
+        <RefreshView x:Name="RefreshView" Refreshing="RefreshView_Refreshing">
             <ScrollView>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -13,12 +18,8 @@
                     </Grid.RowDefinitions>
                     <Frame BorderColor="White" HasShadow="True">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="8*"/>
-                            </Grid.RowDefinitions>
-                            <Label x:Name="LabelDia" Text="Toplam Diyalizör Uretimi" HorizontalOptions="Center" FontAttributes="Bold"/>
-                            <microcharts:ChartView x:Name="chartViewDia" Grid.Row="1">
+
+                            <microcharts:ChartView x:Name="chartViewDia">
                                 <microcharts:ChartView.GestureRecognizers>
                                     <TapGestureRecognizer  NumberOfTapsRequired="2"/>
                                 </microcharts:ChartView.GestureRecognizers>

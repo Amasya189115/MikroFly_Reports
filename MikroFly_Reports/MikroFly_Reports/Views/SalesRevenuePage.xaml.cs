@@ -68,8 +68,8 @@ namespace MikroFly_Reports.Views
             PaletteLinear = new List<ColorPalette>();
             try
             {
-                Palette.Add(new ColorPalette { Hue = 7, Saturation = 56, Value = 99 });
                 Palette.Add(new ColorPalette { Hue = 206, Saturation = 41, Value = 83 });
+                Palette.Add(new ColorPalette { Hue = 7, Saturation = 56, Value = 99 });
                 Palette.Add(new ColorPalette { Hue = 82, Saturation = 57, Value = 88 });
                 Palette.Add(new ColorPalette { Hue = 299, Saturation = 34, Value = 74 });
                 Palette.Add(new ColorPalette { Hue = 33, Saturation = 65, Value = 100 });
@@ -108,7 +108,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("SELECT * from FX_MOBILAPP_SALES_REVENUE("+ IlkTarih+ ","+SonTarih+","+RevenueOrQty+")", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("SELECT * from FX_MOBILAPP_SALES_REVENUE("+ IlkTarih+ ","+SonTarih+","+RevenueOrQty+ ",'"+Group+"')", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -156,11 +156,11 @@ namespace MikroFly_Reports.Views
                     {
                         case 0:
                             Label1.Text=data.Name.ToString()+" %"+Math.Round((data.Revenue_Euro/TotalRevenue)*100,0).ToString();
-                            Label1.TextColor = Color.FromHex("fd7f6f");
+                            Label1.TextColor = Color.FromHex("7eb0d5"); 
                             break;
                         case 1:
                             Label2.Text = data.Name.ToString() + " %" + Math.Round((data.Revenue_Euro / TotalRevenue)*100, 0).ToString();
-                            Label2.TextColor = Color.FromHex("7eb0d5");
+                            Label2.TextColor = Color.FromHex("fd7f6f");
                             break;
                         case 2:
                             Label3.Text = data.Name.ToString() + " %" + Math.Round((data.Revenue_Euro / TotalRevenue)*100, 0).ToString();
@@ -218,7 +218,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Select * from RIDVAN_MOBILEAPP_SALESPERYEAR", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("Select * from [FX_MOBILAPP_SALES_PERYEAR] ('"+Group+"')", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -322,17 +322,17 @@ namespace MikroFly_Reports.Views
             string sqlcom = string.Empty;
             if(LabelSelected.Text=="Country")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10COUNTRY] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10COUNTRY] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+",'"+Group+"' )";
             }
 
             if(LabelSelected.Text == "Customer")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10CUSTOMER] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10CUSTOMER] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+ ",'"+Group+"'  )";
             }
 
             if(LabelSelected.Text == "Type")
             {
-                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10PRODUCT] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+" )";
+                sqlcom = "Select * From [dbo].[FX_MOBILAPP_SALES_TOP10PRODUCT] ( "+IlkTarih+"  ,"+SonTarih+","+RevenueOrQty+ ",'"+Group+"'  )";
             }
 
             try
@@ -420,13 +420,19 @@ namespace MikroFly_Reports.Views
                         IlkTarih = "'20180101'";
                         SonTarih = "GetDate()";    
                     }
-                    FillRevenuePerProdLineChart();
-                    FillRevenuePerTimeChart();
-                    FillRevenuePerTopicChart();
+
 
                 };
 
-                
+                pageInfo.ProductGroupEventHandler += async (popupsender, userdata) =>
+                {
+                    Group="%"+userdata+"%";
+                    FillRevenuePerProdLineChart();
+                    FillRevenuePerTimeChart();
+                    FillRevenuePerTopicChart();
+                };
+
+
 
                 await PopupNavigation.Instance.PushAsync(pageInfo);
             }
@@ -434,6 +440,8 @@ namespace MikroFly_Reports.Views
             {
                 await DisplayAlert("Error", ex.Message, "Ok");
             }
+
+
         }
 
         private void TapGestureRecognizer_PointChartViewTopic(object sender, EventArgs e)

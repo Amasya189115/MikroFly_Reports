@@ -10,8 +10,13 @@
             <Label Text="Filter By" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" HorizontalOptions="Center" TextColor="White"/>
         </Frame>
         <Frame CornerRadius="20" BackgroundColor="White">
-            <dxe:ComboBoxEdit x:Name="ComboBoxPeriod" HelpText="Report Period" TextHorizontalAlignment="Center" TextFontAttributes="Bold" 
+            <StackLayout>
+                <dxe:ComboBoxEdit x:Name="ComboBoxProductGroup" HelpText="Product Group" TextHorizontalAlignment="Center" TextFontAttributes="Bold" 
+                          BorderColor="Firebrick" TextColor="Firebrick" SelectionChanged="ComboBoxProductGroup_SelectionChanged"/>
+                <dxe:ComboBoxEdit x:Name="ComboBoxPeriod" HelpText="Report Period" TextHorizontalAlignment="Center" TextFontAttributes="Bold" 
                           BorderColor="Firebrick" TextColor="Firebrick" SelectionChanged="ComboBoxPeriod_SelectionChanged"/>
+            </StackLayout>
+
         </Frame>
         <Grid>
             <Button Text="FILTER" x:Name="ButtonPopUpFilter" Clicked="ButtonPopUpFilter_Clicked" CornerRadius="20"/>

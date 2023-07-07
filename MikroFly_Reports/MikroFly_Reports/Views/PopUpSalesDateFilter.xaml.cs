@@ -14,12 +14,14 @@ namespace MikroFly_Reports.Views
     public partial class PopUpSalesDateFilter : Rg.Plugins.Popup.Pages.PopupPage
     {
         public EventHandler<string> DateEventHandler;
+        public EventHandler<string> ProductGroupEventHandler;
         public PopUpSalesDateFilter()
         {
             InitializeComponent();
-            FillComboBox();
+            FillComboBoxYears();
+            FillComboBoxProductGroup();
         }
-        private void FillComboBox()
+        private void FillComboBoxYears()
         {
             List<string> itemlist = new List<string>();
             int loop = 0;
@@ -34,6 +36,15 @@ namespace MikroFly_Reports.Views
             ComboBoxPeriod.ItemsSource = itemlist;
             ComboBoxPeriod.SelectedItem = "All Years";
         }
+        private void FillComboBoxProductGroup()
+        {
+            List<string> itemlist = new List<string>();
+            itemlist.Add("DIALYZER");
+            itemlist.Add("BLOODLINE");
+            itemlist.Add("POWDER");
+            itemlist.Add("MACHINERY");
+            ComboBoxProductGroup.ItemsSource = itemlist;
+        }
 
         private void ComboBoxPeriod_SelectionChanged(object sender, EventArgs e)
         {
@@ -47,12 +58,26 @@ namespace MikroFly_Reports.Views
             else
             { DateEventHandler?.Invoke(this, ComboBoxPeriod.SelectedValue.ToString()); }
 
+            if (ComboBoxProductGroup.SelectedValue is null)
+            {
+                ProductGroupEventHandler?.Invoke(this, "%%");
+            }
+            else
+            { 
+                ProductGroupEventHandler?.Invoke(this, ComboBoxProductGroup.SelectedValue.ToString()); 
+            }
+
             await Navigation.PopPopupAsync();
         }
 
         private void ButtonPopUpExit_Clicked(object sender, EventArgs e)
         {
             Navigation.PopPopupAsync();
+        }
+
+        private void ComboBoxProductGroup_SelectionChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

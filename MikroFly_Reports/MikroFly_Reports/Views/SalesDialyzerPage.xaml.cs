@@ -1,5 +1,7 @@
-﻿using Microcharts;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using Microcharts;
 using MikroFly_Reports.Models;
+using Rg.Plugins.Popup.Services;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -18,23 +20,32 @@ namespace MikroFly_Reports.Views
     public partial class SalesDialyzerPage : ContentPage
     {
         public List<GeneralTwoColumn> SoldDia;
+        public List<Sqm> sizes;
+        public float TotalDia = 0;
+        public string DateFilter = string.Empty;
+        public string IlkTarih = "'20180101'";
+        public string SonTarih = "GetDate()";
+        public string TitleString = "Dialyzer Sales of ";
+        public string TitleString2 = "All Times";
         public SalesDialyzerPage()
         {
             InitializeComponent();
-            DisplayDiaChart();
+            DisplayDiaChart(IlkTarih,SonTarih);
             DisplayFluxChart();
             DisplayTypeChart();
+            DisplaySizeChart();
         }
-        private void DisplayDiaChart()
+        private void DisplayDiaChart(string firstdate, string lastdate)
         {
             SoldDia = new List<GeneralTwoColumn>();
             var entries = new List<ChartEntry>();
+            TotalDia = 0;
             try
             {
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Select * from [dbo].[FX_MOBILAPP_SALES_DIALYZERS_QTY] ( '20200101'  , '20230618', '%%', '', '%DIA%', '%%', '%%', '%%' )", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("Select * from [dbo].[FX_MOBILAPP_SALES_DIALYZERS_QTY] ( "+firstdate+"  , "+lastdate+", '%%', '', '%DIA%', '%%', '%%', '%%' )", sqlcon);
 
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
@@ -60,6 +71,7 @@ namespace MikroFly_Reports.Views
                         TextColor = SKColor.FromHsv(0, 0, 255),
                     };
                     entries.Add(entry);
+                    TotalDia = TotalDia + data.Qty;
                 };
 
 
@@ -173,14 +185,123 @@ namespace MikroFly_Reports.Views
             LabelPES.Text = "PES: %" + Math.Round((CountPES / (CountPES + CountPS) * 100), 0).ToString();
             //LabelObjective.Text = Achieved.ToString();
         }
+        private void DisplaySizeChart()
+        {
+            bool check = false;
+            sizes = new List<Sqm>();
+            var entries = new List<ChartEntry>();
+            try
+            {
+                foreach (var item in SoldDia)
+                {
+                    foreach (var data in sizes)
+                    {
+                        if (item.Name.Substring(item.Name.IndexOf("S") + 1, 2) == data.Dimens)
+                        {
+                            check = true;
+                            data.Quantity = data.Quantity + item.Qty;
+                        }
+
+                    }
+                    if (check)
+                    {
+
+                    }
+                    else
+                    {
+                        sizes.Add(new Sqm
+                        {
+                            Dimens = item.Name.Substring(item.Name.IndexOf("S") + 1, 2),
+                            Quantity = item.Qty,
+                        });
+                    }
+                    check = false;
+                };
+                foreach (var data in sizes)
+                {
+                    {
+                        Random ran = new Random();
+                        SKColor randomColor = SKColor.FromHsv(ran.Next(256), ran.Next(256), ran.Next(256));
+
+                        var entry = new ChartEntry(data.Quantity)
+                        {
+                            Label = data.Dimens,
+                            ValueLabel = "% " + Math.Round((data.Quantity / TotalDia) * 100, 0).ToString(),
+                            Color = SKColor.FromHsv(0, 0, 255),
+                            ValueLabelColor = SKColor.FromHsv(0, 0, 255),
+                            TextColor = SKColor.FromHsv(0, 0, 255),
+                        };
+                        entries.Add(entry);
+                    }
+
+                };
+
+
+                var chartBar = new LineChart()
+                {
+                    Entries = entries,
+                    LabelTextSize = 25,
+                };
+
+                this.ChartSize.Chart = chartBar;
+
+            }
+            catch (Exception ex)
+            {
+                Application.Current.MainPage.DisplayAlert("Uyarı", ex.Message.ToString(), "Tamam");
+            }
+        }
 
         private async void RefreshView_Refreshing(object sender, EventArgs e)
         {
             await Task.Delay(3000);
-            DisplayDiaChart();
+            DisplayDiaChart(IlkTarih, SonTarih);
             DisplayFluxChart();
             DisplayTypeChart();
+            DisplaySizeChart();
             RefreshView.IsRefreshing = false;
+        }
+        private async void ToolBartoDateFilter_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                DateFilter = String.Empty;
+                var pageInfo = new PopUpSalesDateFilter();
+                pageInfo.DateEventHandler += async (popupsender, userdata) =>
+                {
+
+                    if (userdata != "All Years")
+                    {
+                        DateFilter = userdata;
+                        TitleString2 = userdata;
+                        SalesDialyzerAnalysisPage.Title = TitleString + TitleString2;
+
+                        IlkTarih = "'" + userdata + "0101'";
+                        SonTarih = "'" + userdata + "1231'";
+                    }
+                    else
+                    {
+                        TitleString2 = userdata;
+                        SalesDialyzerAnalysisPage.Title = TitleString + TitleString2;
+
+                        IlkTarih = "'20180101'";
+                        SonTarih = "GetDate()";
+                    }
+                    DisplayDiaChart(IlkTarih, SonTarih);
+                    DisplayFluxChart();
+                    DisplayTypeChart();
+                    DisplaySizeChart();
+
+                };
+
+
+
+                await PopupNavigation.Instance.PushAsync(pageInfo);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "Ok");
+            }
         }
     }
 }
