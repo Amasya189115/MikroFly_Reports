@@ -106,20 +106,20 @@
         <ShellContent Route="BloProductionPage" ContentTemplate="{DataTemplate local:BloProductionPage}" Title="Bloodline" Icon="icon_feed.png"/>
         <ShellContent Route="PowProductionPage" ContentTemplate="{DataTemplate local:PowProductionPage}" Title="Powder" Icon="icon_feed.png"/>
     </FlyoutItem>
-    <FlyoutItem x:Name="HR" Title="People and Culture" Icon="people.png">
+    <!--FlyoutItem x:Name="HR" Title="People and Culture" Icon="people.png">
         <ShellContent Route="HumanResourcesPage" ContentTemplate="{DataTemplate local:HumanResourcesPage}" Title="Summary" Icon="icon_feed.png"/>
         <ShellContent Route="PersonnelInfo" ContentTemplate="{DataTemplate local:PersonnelAllInfoPage}" Title="Personnel Info" Icon="icon_feed.png"/>
         <ShellContent Route="AnnualPermitPage" ContentTemplate="{DataTemplate local:AnnualPermitPage}" Title="Annual Leave" Icon="icon_feed.png"/>
-    </FlyoutItem>
+    </FlyoutItem-->
     <FlyoutItem Title="Sales Page" Icon="sales.png">
         <ShellContent Route="SalesRevenuePage" ContentTemplate="{DataTemplate local:SalesRevenuePage}" Title="$ Summary" Icon="icon_feed.png"/>
         <ShellContent Route="SalesDialyzerPage" ContentTemplate="{DataTemplate local:SalesDialyzerPage}" Title="Dialyzers" Icon="icon_feed.png"/>
         <ShellContent Route="SalesDetailPage" ContentTemplate="{DataTemplate local:SalesDetailPage}" Title="Detail" Icon="icon_feed.png"/>
 
     </FlyoutItem>
-    <FlyoutItem Title="TQM Records" Icon="quality.png" FlyoutItemIsVisible="True">
+    <!--FlyoutItem Title="TQM Records" Icon="quality.png" FlyoutItemIsVisible="True">
         <ShellContent Route="LotNuTrackingPage" ContentTemplate="{DataTemplate local:LotNuTrackingPage}" />
-    </FlyoutItem>
+    </FlyoutItem-->
 
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

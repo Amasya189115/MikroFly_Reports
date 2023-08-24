@@ -237,9 +237,9 @@ namespace MikroFly_Reports.Views
                     {
                         Label = data.Name,
                         ValueLabel =CurrencyOrPcs + String.Format("{0:N0}", data.Revenue_Euro),
-                        Color = SKColor.FromHsv(0, 0, 255),
-                        ValueLabelColor = SKColor.FromHsv(0, 0, 255),
-                        TextColor = SKColor.FromHsv(0, 0, 255),
+                        Color = SKColor.FromHsv(0, 0, 0),
+                        ValueLabelColor = SKColor.FromHsv(0, 0, 0),
+                        TextColor = SKColor.FromHsv(0, 0, 0),
                     };
                     entries1.Add(entry1);
                 };
@@ -247,7 +247,7 @@ namespace MikroFly_Reports.Views
                 {
                     Entries = entries1,
                     LabelTextSize = 25,
-                    LabelColor = SKColor.FromHsv(0, 0, 255),
+                    LabelColor = SKColor.FromHsv(0, 0, 0),
                 };
                 RevenuePerYear = Revenue;
                 this.PointChartViewTime.Chart = chartLine;
@@ -276,7 +276,7 @@ namespace MikroFly_Reports.Views
                 SqlConnection sqlcon = new SqlConnection(LoginPage.ConnectionString);
                 sqlcon.Open();
                 ////SqlCommand sqlcom = new SqlCommand("SELECT * FROM [dbo].[FX_BarkodMiktar] ('" + message.Text + "'," + StokHareketAyarSayfasi.cikisdepodeger + "," + resultsthevraktip.Last().ToString() + ",0)", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Execute [Monthly_Revenue] "+IlkTarih+","+SonTarih+"", sqlcon);
+                SqlCommand sqlcom = new SqlCommand("Execute [Monthly_Revenue] "+IlkTarih+","+SonTarih+ ",'"+ Group + "'", sqlcon);
                 SqlDataReader sdr = sqlcom.ExecuteReader();
                 while (sdr.Read())
                 {
@@ -295,9 +295,9 @@ namespace MikroFly_Reports.Views
                     {
                         Label = data.Name,
                         ValueLabel = CurrencyOrPcs + String.Format("{0:N0}", data.Revenue_Euro),
-                        Color = SKColor.FromHsv(0, 0, 255),
-                        ValueLabelColor = SKColor.FromHsv(0, 0, 255),
-                        TextColor = SKColor.FromHsv(0, 0, 255),
+                        Color = SKColor.FromHsv(0, 0, 0),
+                        ValueLabelColor = SKColor.FromHsv(0, 0, 0),
+                        TextColor = SKColor.FromHsv(0, 0, 0),
                     };
                     entries1.Add(entry1);
                 };
@@ -305,7 +305,7 @@ namespace MikroFly_Reports.Views
                 {
                     Entries = entries1,
                     LabelTextSize = 25,
-                    LabelColor = SKColor.FromHsv(0, 0, 255),
+                    LabelColor = SKColor.FromHsv(0, 0, 0),
                 };
                 RevenuePerMonth = Revenue;
                 this.PointChartViewTime.Chart = chartLine;
@@ -359,9 +359,9 @@ namespace MikroFly_Reports.Views
                     {
                         Label = data.Name,
                         ValueLabel = CurrencyOrPcs + String.Format("{0:N0}", data.Revenue_Euro),
-                        Color = SKColor.FromHsv(0, 0, 255),
-                        ValueLabelColor = SKColor.FromHsv(0, 0, 255),
-                        TextColor = SKColor.FromHsv(0, 0, 255),
+                        Color = SKColor.FromHsv(0, 0, 0),
+                        ValueLabelColor = SKColor.FromHsv(0, 0, 0),
+                        TextColor = SKColor.FromHsv(0, 0, 0),
                     };
                     entries1.Add(entry1);
                 };
@@ -369,7 +369,7 @@ namespace MikroFly_Reports.Views
                 {
                     Entries = entries1,
                     LabelTextSize = 25,
-                    LabelColor = SKColor.FromHsv(0, 0, 255),
+                    LabelColor = SKColor.FromHsv(0, 0, 0),
                 };
 
                 this.PointChartViewTopic.Chart = chartLine;

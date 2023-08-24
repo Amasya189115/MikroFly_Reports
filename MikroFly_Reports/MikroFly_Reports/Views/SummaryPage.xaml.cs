@@ -294,14 +294,14 @@ namespace MikroFly_Reports.Views
                 {
                     if(status=="60")
                     {
-
+                        DisplayPowChart(status);
                         DisplayDiaChartNonSteril(status);
                         DisplayBloChartNonSteril(status);
                         DisplayNeedleChartNonSteril(status);
                     }
                     else
                     {
-
+                        DisplayPowChart(status);
                         DisplayDiaChartSterilizationProcess(status);
                         DisplayBloChartSterilizationProcess(status);
                         DisplayNeedleChartSterilizationProcess(status);

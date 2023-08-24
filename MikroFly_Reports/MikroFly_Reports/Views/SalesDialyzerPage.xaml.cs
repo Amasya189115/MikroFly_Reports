@@ -66,9 +66,9 @@ namespace MikroFly_Reports.Views
                     {
                         Label = data.Name,
                         ValueLabel = data.Qty.ToString(),
-                        Color = SKColor.FromHsv(0, 0, 255),
-                        ValueLabelColor = SKColor.FromHsv(0, 0, 255),
-                        TextColor = SKColor.FromHsv(0, 0, 255),
+                        Color = SKColor.FromHsv(0, 0, 0),
+                        ValueLabelColor = SKColor.FromHsv(0, 0, 0),
+                        TextColor = SKColor.FromHsv(0, 0, 0),
                     };
                     entries.Add(entry);
                     TotalDia = TotalDia + data.Qty;
@@ -131,7 +131,8 @@ namespace MikroFly_Reports.Views
             {
                 Entries = entries,
                 LabelTextSize = 25,
-                LabelMode = LabelMode.None
+                LabelMode = LabelMode.None,
+                LabelColor = SKColor.FromHsv(0, 0, 0),
             };
             this.ChartFluxRatio.Chart = chartdonut;
             LabelHF.Text = "HF: %" + Math.Round((CountHF / (CountLF + CountHF) * 100), 0).ToString();
@@ -178,7 +179,8 @@ namespace MikroFly_Reports.Views
             {
                 Entries = entries,
                 LabelTextSize = 25,
-                LabelMode = LabelMode.None
+                LabelMode = LabelMode.None,
+                LabelColor = SKColor.FromHsv(0, 0, 0),
             };
             this.ChartTypeRatio.Chart = chartdonut;
             LabelPS.Text = "PS: %" + Math.Round((CountPS / (CountPES + CountPS) * 100), 0).ToString();
@@ -221,15 +223,15 @@ namespace MikroFly_Reports.Views
                 {
                     {
                         Random ran = new Random();
-                        SKColor randomColor = SKColor.FromHsv(ran.Next(256), ran.Next(256), ran.Next(256));
+                        SKColor randomColor = SKColor.FromHsv(0, 0, 0);
 
                         var entry = new ChartEntry(data.Quantity)
                         {
                             Label = data.Dimens,
                             ValueLabel = "% " + Math.Round((data.Quantity / TotalDia) * 100, 0).ToString(),
-                            Color = SKColor.FromHsv(0, 0, 255),
-                            ValueLabelColor = SKColor.FromHsv(0, 0, 255),
-                            TextColor = SKColor.FromHsv(0, 0, 255),
+                            Color = SKColor.FromHsv(0, 0, 0),
+                            ValueLabelColor = SKColor.FromHsv(0, 0, 0),
+                            TextColor = SKColor.FromHsv(0, 0, 0),
                         };
                         entries.Add(entry);
                     }
@@ -240,7 +242,9 @@ namespace MikroFly_Reports.Views
                 var chartBar = new LineChart()
                 {
                     Entries = entries,
-                    LabelTextSize = 25,
+                    LabelTextSize = 35,
+                    LabelColor = SKColor.FromHsv(0, 0, 0),
+
                 };
 
                 this.ChartSize.Chart = chartBar;
