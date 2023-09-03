@@ -4,7 +4,7 @@
              x:Class="MikroFly_Reports.Views.AnnualPermitPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Annual Permit Page!"
+            <Label Text="Annual Permit Page! "
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
