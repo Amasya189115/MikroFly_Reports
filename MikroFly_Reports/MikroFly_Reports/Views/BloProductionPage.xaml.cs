@@ -62,5 +62,6 @@ namespace MikroFly_Reports.Views
             Navigation.PushAsync(new BloProdDetailsPage(classId.ToString()));
         }
 
+
     }
 }
